@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class DatastorePagerViewModel(private val repository: DatastoreRepository) : ViewModel(), DatastoreContract.ViewPagerViewModel {
     private var progressLoadStatus: MutableLiveData<ProgressStatus> = MutableLiveData()
-    private var dataList: MutableLiveData<List<DatastoreRecordEntity>> = MutableLiveData()
+     var dataList: MutableLiveData<List<DatastoreRecordEntity>> = MutableLiveData()
 
     override fun searchDatastoreEntry(year: String) {
         viewModelScope.launch {
