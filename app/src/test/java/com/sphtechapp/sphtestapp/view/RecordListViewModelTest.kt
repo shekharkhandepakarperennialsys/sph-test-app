@@ -1,4 +1,4 @@
-package com.sphtechapp.sphtestapp
+package com.sphtechapp.sphtestapp.view
 
 import androidx.lifecycle.Observer
 import com.sphtechapp.sphtestapp.database.DatastoreRecordEntity
