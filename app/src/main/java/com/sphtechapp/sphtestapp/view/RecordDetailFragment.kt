@@ -16,9 +16,9 @@ import com.sphtechapp.sphtestapp.receiver.YearTrackerReceiver
 
 class RecordDetailFragment : Fragment() {
 
-    private var _binding: FragmentRecordDetailBinding? = null
+    private lateinit var _binding: FragmentRecordDetailBinding
 
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     private var position: Int = 0
     private var yearData = arrayListOf<String>()
@@ -50,24 +50,22 @@ class RecordDetailFragment : Fragment() {
     }
 
     private fun setupTabs(positionClicked: Int) {
+        binding.viewPager.registerOnPageChangeCallback(pageChanged)
         binding.viewPager.adapter = DatastorePagerAdapter(requireActivity(), yearData)
         binding.viewPager.offscreenPageLimit = 3
         binding.viewPager.setCurrentItem(positionClicked, false)
         binding.tabEntryYear.getTabAt(positionClicked)?.select()
-        sendBroadCast(positionClicked)
 
         TabLayoutMediator(binding.tabEntryYear, binding.viewPager
         ) { tab: TabLayout.Tab, position: Int ->
             tab.text = yearData[position]
         }.attach()
-        binding.viewPager.registerOnPageChangeCallback(pageChanged)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding.viewPager.registerOnPageChangeCallback(pageChanged)
         yearData.clear()
-        _binding = null
     }
 
     private fun sendBroadCast(pagePosition: Int) {
